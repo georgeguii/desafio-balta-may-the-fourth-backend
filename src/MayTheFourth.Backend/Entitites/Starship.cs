@@ -1,6 +1,6 @@
 ﻿namespace MayTheFourth.Backend.Entitites;
 
-public class Starship
+public class Starship : Entity
 {
     public string Name { get; set; }
     public string Model { get; set; }

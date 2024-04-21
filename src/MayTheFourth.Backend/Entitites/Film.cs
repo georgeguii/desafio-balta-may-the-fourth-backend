@@ -1,6 +1,6 @@
 ﻿namespace MayTheFourth.Backend.Entitites;
 
-public class Film
+public class Film : Entity
 {
     public string Title { get; set; }
     public int Episode { get; set; }
