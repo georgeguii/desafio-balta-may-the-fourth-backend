@@ -1,22 +1,31 @@
-﻿namespace MayTheFourth.Backend.Configurations
+﻿using MayTheFourth.Backend.DataBase;
+using Microsoft.EntityFrameworkCore;
+
+namespace MayTheFourth.Backend.Configurations
 {
     public static class ApiConfiguration
     {
-        public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void AddApiConfiguration(this IServiceCollection services)
         {
-            AddDbContext(services, configuration);
+            AddDbContext(services);
+            services.AddEndpointsApiExplorer();
             services.AddSwaggerConfiguration();
         }
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwaggerConfiguration(env);
+
+            if (env.IsDevelopment())
+            {
+                app.UseSeedDataBase();
+            }
         }
 
-        private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
+        private static void AddDbContext(IServiceCollection services)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            //add context
+            services.AddDbContext<ApiDbContext>(options =>
+                options.UseInMemoryDatabase(databaseName: "Database"));
         }
 
     }

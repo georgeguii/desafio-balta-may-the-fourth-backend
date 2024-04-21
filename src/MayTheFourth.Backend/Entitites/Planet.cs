@@ -1,6 +1,6 @@
 ﻿namespace MayTheFourth.Backend.Entitites;
 
-public class Planet
+public class Planet : Entity
 {
     public string Name { get; set; }
     public string RotationPeriod { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace MayTheFourth.Backend.Entitites;
 
-public class Vehicle
+public class Vehicle : Entity
 {
     public string Name { get; set; }
     public string Model { get; set; }

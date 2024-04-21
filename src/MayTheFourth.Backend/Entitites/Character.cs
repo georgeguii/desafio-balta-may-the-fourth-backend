@@ -1,6 +1,6 @@
 ﻿namespace MayTheFourth.Backend.Entitites;
 
-public class Character
+public class Character : Entity
 {
     public string Name { get; set; }
     public string Height { get; set; }
