@@ -1,7 +1,104 @@
 ﻿@page "/"
+@inject IJSRuntime JS
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Início</PageTitle>
 
-<h1>Hello, world!</h1>
+<section>
+    <section class="intro">
+        Há muito tempo atrás, em uma galáxia <br />
+        muito, muito distante…
+    </section>
+    <section class="logo">
+        DESAFIO <br /> BALTA.IO
+    </section>
+    <div id="scroller">
+        <div id="content">
+            <p id="title">Episódio IV</p>
+            <p id="subtitle">UM NOVO BUG</p>
 
-Welcome to your new app.
+            <br>
+
+            <p>
+                O código está agitado! Uma transmissão criptografada ecoa pelos repositórios, uma ameaça de RETORNO na voz do falecido ARQUITETO DO CÓDIGO.
+            </p>
+
+            <br />
+
+            <p>
+                O GENERAL DEV-LEIA envia agentes secretos para decifrar, enquanto REY, a última esperança do GIT, se prepara para combater a sinistra PRIMEIRA COMPILE.
+            </p>
+
+            <br />
+
+            <p>
+                Enquanto isso, o SUPREMO LÍDER KYLO DEBUG busca pelo fantasma do Arquiteto, determinado a eliminar qualquer bug em seu caminho.
+            </p>
+
+            <br />
+
+            <p>
+                Nos bastidores, as branches se unem para um merge épico que determinará o destino dos sistemas em produção.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="backend" class="min-w-[90%] min-h-[65vh] border-4 border-yellow-400 rounded p-6">
+    <div class="w-4/5 h-4/5 flex flex-col">
+        <h1 class="w-full text-3xl justify-self-center">BACK-END</h1>
+    </div>
+</section>
+
+<section id="frontend" class="w-80">
+</section>
+
+<section id="balta" class="w-80">
+</section>
+
+
+<script>
+    window.createStar = () => {
+        const star = document.createElement("div");
+        star.className = 'stars';
+
+        const setStyle = (top, left) => {
+            star.style.top = top + '%';
+            star.style.left = left + '%';
+        };
+
+        var delay = Math.random() * 5;
+        star.style.animationDelay = delay + "s";
+
+        const appendToBody = () => {
+            document.body.appendChild(star);
+        };
+
+        return { setStyle, appendToBody };
+    };
+
+    window.randomPosition = () => {
+        const randomX = Math.round(Math.random() * 10000) / 100;
+        const randomY = Math.round(Math.random() * 10000) / 100;
+        return [randomX, randomY];
+    };
+</script>
+
+@code {
+    int stars = 800;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            for (int i = 0; i < stars; i++)
+            {
+                await JS.InvokeVoidAsync("createStar");
+                var star = await JS.InvokeAsync<IJSObjectReference>("createStar");
+                var xy = await JS.InvokeAsync<float[]>("randomPosition");
+
+                await star.InvokeVoidAsync("setStyle", xy[0], xy[1]);
+                await star.InvokeVoidAsync("appendToBody");
+            }
+        }
+    }
+}
