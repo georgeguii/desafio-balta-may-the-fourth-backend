@@ -5,35 +5,37 @@
 </div>
 
 <div>
-    <nav class="flex flex-col mt-5 gap-3">
+    <nav class="flex mt-5 flex-col gap-3">
         <div class="px-3">
             <NavLink href="#" Match="NavLinkMatch.All" class="flex gap-2 items-center">
                 <img src="/icons/home.svg" alt="Menu Inicio" width="35px" height="35px">
-                Início
+                <span>Início</span>
             </NavLink>
         </div>
-        <div class="px-3">
-            <NavLink href="counter" class="flex gap-2 items-center">
+        <div class="px-3"
+        style="padding-left:1rem;">
+            <NavLink href="counter" class="flex gap-3 items-center">
                 <img src="/icons/popcorn.svg" alt="Menu Filmes" width="25px" height="25px">
-                Filmes
+                <span>Filmes</span>
             </NavLink>
         </div>
         <div class="px-3">
             <NavLink href="counter" class="flex gap-2 items-center">
                 <img src="/icons/darthVader.svg" alt="Menu Personagens" width="35px" height="35px">
-                Personagens
+                <span>Personagens</span>
             </NavLink>
         </div>
-        <div class="px-3">
-            <NavLink href="counter" class="flex gap-2 items-center">
+        <div class="px-3"
+        style="padding-left:1rem;">
+            <NavLink href="counter" class="flex gap-3 items-center">
                 <img src="/icons/planets.svg" alt="Menu Planetas" width="25px" height="25px">
-                Planetas
+                <span>Planetas</span>
             </NavLink>
         </div>
         <div class="px-3">
             <NavLink href="counter" class="flex gap-2 items-center">
                 <img src="/icons/starship.svg" alt="Menu Naves" width="35px" height="35px">
-                Naves
+                <span>Naves</span>
             </NavLink>
         </div>
         <div class="px-3">
@@ -45,5 +47,12 @@
     </nav>
 </div>
 
+<style scoped>
+    .padronizarIcone{
+        padding-left: 2rem;
+    
+    }
+
+</style>
 @code {
 }

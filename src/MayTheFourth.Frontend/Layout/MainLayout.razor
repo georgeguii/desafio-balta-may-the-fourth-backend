@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-<div class="flex h-screen">
+<div class="flex h-screen @classeBotao" @onmousedown="MouseButtonDown" @onmouseup="MouseButtonUp">
     <div class="w-1/5 bg-gray-900/85 text-white">
         <NavMenu />
     </div>
@@ -10,3 +10,27 @@
         </article>
     </main>
 </div>
+
+@code{
+
+    string classeBotao = "mouse-up";
+
+    void MouseButtonDown(MouseEventArgs e){
+        classeBotao = "mouse-down";
+    }
+
+    void MouseButtonUp(MouseEventArgs e)
+    {
+        classeBotao = "mouse-up";
+    }
+}
+
+<style>
+    .mouse-up{
+        cursor: url('/cursor/cursorNormal.png'), auto;
+    }
+
+    .mouse-down{
+        cursor: url('/cursor/cursorClicado.png'), auto;
+    }
+</style>
