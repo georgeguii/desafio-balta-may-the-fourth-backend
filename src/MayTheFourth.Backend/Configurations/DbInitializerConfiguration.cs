@@ -4,7 +4,7 @@ namespace MayTheFourth.Backend.Configurations
 {
     internal static class DbInitializerExtension
     {
-        public static IApplicationBuilder UseSeedDataBase(this IApplicationBuilder app)
+        public static async Task<IApplicationBuilder> UseSeedDataBase(this IApplicationBuilder app)
         {
             ArgumentNullException.ThrowIfNull(app, nameof(app));
 
@@ -13,11 +13,11 @@ namespace MayTheFourth.Backend.Configurations
             try
             {
                 var context = services.GetRequiredService<ApiDbContext>();
-                DbInitializer.Initialize(context);
+                await DbInitializer.Initialize(context);
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
 
             return app;

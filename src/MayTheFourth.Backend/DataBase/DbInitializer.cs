@@ -1,36 +1,54 @@
 ﻿using MayTheFourth.Backend.Entitites;
-using Microsoft.EntityFrameworkCore;
+using MayTheFourth.SWAPIWrapper;
 
 namespace MayTheFourth.Backend.DataBase
 {
     internal class DbInitializer
     {
-        internal static void Initialize(ApiDbContext dbContext)
+        internal static async Task Initialize(ApiDbContext dbContext)
         {
             ArgumentNullException.ThrowIfNull(dbContext, nameof(dbContext));
             dbContext.Database.EnsureCreated();
 
-            AddFilm(dbContext);
+            var wrapperAPI = new StarWarsAPI();
 
-            dbContext.SaveChanges();
+            await AddFilmsFromWrapper(dbContext, wrapperAPI);
+            await dbContext.SaveChangesAsync();
         }
 
-        private static void AddFilm(ApiDbContext dbContext)
+        private static async Task AddFilmsFromWrapper(ApiDbContext dbContext, StarWarsAPI wrapperAPI)
         {
-            if (dbContext.Films.Any()) return;
+            if (dbContext.Films.Any())
+                return;
 
-            var film = new Film
+            var page = 1;
+
+            while (true)
             {
-                Id = 1,
-                Title = "The Rise of the Jedi",
-                Episode = 10,
-                OpeningCrawl = "After the fall of the Empire, the galaxy face...",
-                Director = "Jana Doe",
-                Producer = "Leo Smith",
-                ReleaseDate = new DateTime(2028, 12, 15),
-            };
-            dbContext.Films.Add(film);
+                var response = await wrapperAPI.GetAllFilmsAsync(page);
 
+                if (response?.Results?.Any() != true)
+                    break;
+
+                var filmsToAdd = response.Results.Select(res => new Film
+                {
+                    Id = res.EpisodeId,
+                    Episode = res.EpisodeId,
+                    Title = res.Title,
+                    OpeningCrawl = res.OpeningCrawl,
+                    Director = res.Director,
+                    Producer = res.Producer,
+                    ReleaseDate = res.ReleaseDate
+                });
+
+                dbContext.Films.AddRange(filmsToAdd);
+
+                if (string.IsNullOrEmpty(response.Next))
+                    break;
+
+                page++;
+            }
         }
+
     }
 }

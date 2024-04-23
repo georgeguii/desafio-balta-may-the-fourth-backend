@@ -43,7 +43,7 @@ public class FilmIntegrationTests : IClassFixture<WebApplicationFactory<Program>
     {
         var client = _factory.CreateClient();
 
-        var response = await client.GetAsync($"/film/{int.MaxValue}"); ;
+        var response = await client.GetAsync($"/film/{int.MaxValue}");
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
