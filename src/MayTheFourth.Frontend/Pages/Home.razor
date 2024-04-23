@@ -1,4 +1,5 @@
 ﻿@page "/"
+@implements IAsyncDisposable
 @inject IJSRuntime JS
 
 <PageTitle>Início</PageTitle>
@@ -55,50 +56,25 @@
 <section id="balta" class="w-80">
 </section>
 
-
-<script>
-    window.createStar = () => {
-        const star = document.createElement("div");
-        star.className = 'stars';
-
-        const setStyle = (top, left) => {
-            star.style.top = top + '%';
-            star.style.left = left + '%';
-        };
-
-        var delay = Math.random() * 5;
-        star.style.animationDelay = delay + "s";
-
-        const appendToBody = () => {
-            document.body.appendChild(star);
-        };
-
-        return { setStyle, appendToBody };
-    };
-
-    window.randomPosition = () => {
-        const randomX = Math.round(Math.random() * 10000) / 100;
-        const randomY = Math.round(Math.random() * 10000) / 100;
-        return [randomX, randomY];
-    };
-</script>
-
 @code {
     int stars = 800;
+    private IJSObjectReference? module;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            for (int i = 0; i < stars; i++)
-            {
-                await JS.InvokeVoidAsync("createStar");
-                var star = await JS.InvokeAsync<IJSObjectReference>("createStar");
-                var xy = await JS.InvokeAsync<float[]>("randomPosition");
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Home.razor.js");
+            await module.InvokeVoidAsync("createAndPositionStars", stars);
+        }
+    }
 
-                await star.InvokeVoidAsync("setStyle", xy[0], xy[1]);
-                await star.InvokeVoidAsync("appendToBody");
-            }
+    //Dispose of the js module
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        if (module is not null)
+        {
+            await module.DisposeAsync();
         }
     }
 }
