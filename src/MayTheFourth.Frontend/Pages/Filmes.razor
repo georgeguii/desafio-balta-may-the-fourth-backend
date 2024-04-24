@@ -1,0 +1,25 @@
+﻿@page "/filmes"
+
+<div class="cardList">
+    @if (listaFilmes.Any())
+    {
+        @foreach (var filme in listaFilmes)
+        {
+            <Card Valor="@filme" />
+        }
+    }
+</div>
+
+@code {
+    List<string> listaFilmes = new List<string> { "Value 1", "Value 2", "Value 3" };
+    
+}
+
+<style>
+    .cardList{
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+</style>
