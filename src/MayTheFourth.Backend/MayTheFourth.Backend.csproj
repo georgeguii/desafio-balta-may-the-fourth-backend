@@ -27,4 +27,8 @@
 	<ItemGroup>
 		<InternalsVisibleTo Include="..\MayTheFourth.Test\MayTheFourth.Test.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\MayTheFourth.SWAPIWrapper\MayTheFourth.SWAPIWrapper.csproj" />
+	</ItemGroup>
 </Project>
