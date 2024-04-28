@@ -21,7 +21,7 @@ namespace MayTheFourth.SWAPIWrapper
 
         public async Task<StarWarsListResponse<StarWarsCharacter>?> GetAllCharactersAsync(int page = 1)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"people/?={page}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"people/?page={page}");
             response.EnsureSuccessStatusCode();
 
             string json = await response.Content.ReadAsStringAsync();
@@ -39,7 +39,7 @@ namespace MayTheFourth.SWAPIWrapper
 
         public async Task<StarWarsListResponse<StarWarsPlanet>?> GetAllPlanetsAsync(int page = 1)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"planets/?={page}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"planets/?page={page}");
             response.EnsureSuccessStatusCode();
 
             string json = await response.Content.ReadAsStringAsync();
@@ -57,7 +57,7 @@ namespace MayTheFourth.SWAPIWrapper
 
         public async Task<StarWarsListResponse<StarWarsFilm>?> GetAllFilmsAsync(int page = 1)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"films/?={page}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"films/?page={page}");
             response.EnsureSuccessStatusCode();
 
             string json = await response.Content.ReadAsStringAsync();
@@ -75,7 +75,7 @@ namespace MayTheFourth.SWAPIWrapper
 
         public async Task<StarWarsListResponse<StarWarsSpecies>?> GetAllSpeciesAsync(int page = 1)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"species/?={page}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"species/?page={page}");
             response.EnsureSuccessStatusCode();
 
             string json = await response.Content.ReadAsStringAsync();
@@ -95,7 +95,7 @@ namespace MayTheFourth.SWAPIWrapper
 
         public async Task<StarWarsListResponse<StarWarsVehicle>?> GetAllVehiclesAsync(int page = 1)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"vehicles/?={page}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"vehicles/?page={page}");
             response.EnsureSuccessStatusCode();
 
             string json = await response.Content.ReadAsStringAsync();
@@ -113,7 +113,7 @@ namespace MayTheFourth.SWAPIWrapper
 
         public async Task<StarWarsListResponse<StarWarsStarship>?> GetAllStarshipsAsync(int page = 1)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"starships/?={page}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"starships/?page={page}");
             response.EnsureSuccessStatusCode();
 
             string json = await response.Content.ReadAsStringAsync();
