@@ -9,3 +9,13 @@ GET {{MayTheFourth.Backend_HostAddress}}/film/1
 Accept: application/json
 
 ###
+
+GET {{MayTheFourth.Backend_HostAddress}}/v1/characters/
+Accept: application/json
+
+###
+
+GET {{MayTheFourth.Backend_HostAddress}}/v1/characters/1
+Accept: application/json
+
+###
