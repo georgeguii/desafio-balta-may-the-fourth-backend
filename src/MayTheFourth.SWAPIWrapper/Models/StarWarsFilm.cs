@@ -1,9 +1,13 @@
-﻿namespace MayTheFourth.SWAPIWrapper.Models
+﻿using System.Text.Json.Serialization;
+
+namespace MayTheFourth.SWAPIWrapper.Models
 {
     public class StarWarsFilm
     {
         public string Title { get; set; }
+        [JsonPropertyName("episode_id")]
         public int EpisodeId { get; set; }
+        [JsonPropertyName("opening_crawl")]
         public string OpeningCrawl { get; set; }
         public string Director { get; set; }
         public string Producer { get; set; }

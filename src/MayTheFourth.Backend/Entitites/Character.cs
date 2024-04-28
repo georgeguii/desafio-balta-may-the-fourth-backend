@@ -10,6 +10,6 @@ public class Character : Entity
     public string EyeColor { get; set; }
     public string BirthYear { get; set; }
     public string Gender { get; set; }
-    public Planet Planet { get; set; }
+    public Planet? Planet { get; set; }
     public List<Film>? Films { get; set; }
 }
