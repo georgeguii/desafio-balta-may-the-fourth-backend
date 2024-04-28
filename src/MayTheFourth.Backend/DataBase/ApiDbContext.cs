@@ -6,6 +6,7 @@ namespace MayTheFourth.Backend.DataBase
     public class ApiDbContext : DbContext
     {
         public DbSet<Film> Films { get; set; }
+        public DbSet<Character> Characters { get; set; }
 
         public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options)
         {

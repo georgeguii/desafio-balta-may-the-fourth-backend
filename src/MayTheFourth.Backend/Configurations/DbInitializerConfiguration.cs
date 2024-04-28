@@ -13,7 +13,7 @@ namespace MayTheFourth.Backend.Configurations
             try
             {
                 var context = services.GetRequiredService<ApiDbContext>();
-                await DbInitializer.Initialize(context);
+                await Task.Run(() => DbInitializer.Initialize(context));
             }
             catch (Exception ex)
             {

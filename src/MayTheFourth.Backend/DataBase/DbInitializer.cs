@@ -12,7 +12,10 @@ namespace MayTheFourth.Backend.DataBase
 
             var wrapperAPI = new StarWarsAPI();
 
-            await AddFilmsFromWrapper(dbContext, wrapperAPI);
+            await Task.WhenAll(
+                AddFilmsFromWrapper(dbContext, wrapperAPI),
+                AddCharactersFromWrapper(dbContext, wrapperAPI)
+            );
             await dbContext.SaveChangesAsync();
         }
 
@@ -42,6 +45,48 @@ namespace MayTheFourth.Backend.DataBase
                 });
 
                 dbContext.Films.AddRange(filmsToAdd);
+
+                if (string.IsNullOrEmpty(response.Next))
+                    break;
+
+                page++;
+            }
+        }
+
+        private static async Task AddCharactersFromWrapper(ApiDbContext dbContext, StarWarsAPI wrapperAPI)
+        {
+            if (dbContext.Characters.Any())
+                return;
+
+            var page = 1;
+
+            while (true)
+            {
+                var response = await wrapperAPI.GetAllCharactersAsync(page);
+
+                if (response?.Results?.Any() != true)
+                    break;
+
+                var characterToAdd = response.Results.Select(res =>
+                {
+                    var urlsSplitted = res.Url.Split("/");
+                    return new Character
+                    {
+                        Id = int.Parse(urlsSplitted[urlsSplitted.Length - 2]),
+                        Name = res.Name,
+                        Height = res.Height,
+                        Weight = res.Mass,
+                        HairColor = res.HairColor,
+                        SkinColor = res.SkinColor,
+                        EyeColor = res.EyeColor,
+                        BirthYear = res.BirthYear,
+                        Gender = res.Gender,
+                        Planet = null,
+                        Films = null
+                    };
+                });
+
+                dbContext.Characters.AddRange(characterToAdd);
 
                 if (string.IsNullOrEmpty(response.Next))
                     break;

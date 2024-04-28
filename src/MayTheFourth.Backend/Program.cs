@@ -1,5 +1,6 @@
 using MayTheFourth.Backend.Configurations;
 using MayTheFourth.Backend.DataBase;
+using MayTheFourth.Backend.Endpoints;
 using MayTheFourth.Backend.Entitites;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,8 @@ app.MapGet("/film/{id}", async (int id, ApiDbContext context) =>
     .WithName("GetFilmById")
     .WithTags("Film");
 
+var mapGroup = app.MapGroup("v1");
+mapGroup.AddCharactersEndpoints();
 
 #endregion
 

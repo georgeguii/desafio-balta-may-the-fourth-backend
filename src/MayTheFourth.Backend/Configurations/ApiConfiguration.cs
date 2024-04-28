@@ -12,13 +12,13 @@ namespace MayTheFourth.Backend.Configurations
             services.AddSwaggerConfiguration();
         }
 
-        public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
+        public static async Task UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwaggerConfiguration(env);
 
             if (env.IsDevelopment())
             {
-                app.UseSeedDataBase();
+                await app.UseSeedDataBase();
             }
         }
 
