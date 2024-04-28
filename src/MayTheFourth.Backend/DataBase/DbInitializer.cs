@@ -33,15 +33,20 @@ namespace MayTheFourth.Backend.DataBase
                 if (response?.Results?.Any() != true)
                     break;
 
-                var filmsToAdd = response.Results.Select(res => new Film
-                {
-                    Id = res.EpisodeId,
-                    Episode = res.EpisodeId,
-                    Title = res.Title,
-                    OpeningCrawl = res.OpeningCrawl,
-                    Director = res.Director,
-                    Producer = res.Producer,
-                    ReleaseDate = res.ReleaseDate
+                var filmsToAdd = response.Results.Select(res => 
+                { 
+                    var urlsSplitted = res.Url.Split("/");
+                
+                    return new Film
+                    {
+                        Id = int.Parse(urlsSplitted[urlsSplitted.Length - 2]),
+                        Episode = res.EpisodeId,
+                        Title = res.Title,
+                        OpeningCrawl = res.OpeningCrawl,
+                        Director = res.Director,
+                        Producer = res.Producer,
+                        ReleaseDate = res.ReleaseDate
+                    };
                 });
 
                 dbContext.Films.AddRange(filmsToAdd);

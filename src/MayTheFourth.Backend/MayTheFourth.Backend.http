@@ -1,11 +1,11 @@
 @MayTheFourth.Backend_HostAddress = http://localhost:5102
 
-GET {{MayTheFourth.Backend_HostAddress}}/film/
+GET {{MayTheFourth.Backend_HostAddress}}/v1/films/
 Accept: application/json
 
 ###
 
-GET {{MayTheFourth.Backend_HostAddress}}/film/1
+GET {{MayTheFourth.Backend_HostAddress}}/v1/films/1
 Accept: application/json
 
 ###

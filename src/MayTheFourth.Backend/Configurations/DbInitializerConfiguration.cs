@@ -13,7 +13,13 @@ namespace MayTheFourth.Backend.Configurations
             try
             {
                 var context = services.GetRequiredService<ApiDbContext>();
-                await Task.Run(() => DbInitializer.Initialize(context));
+                
+                var isTestEnvironment = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name.Contains("Test"));
+                if (isTestEnvironment) 
+                    await DbInitializer.Initialize(context); 
+                else 
+                    await Task.Run(() => DbInitializer.Initialize(context));
+                
             }
             catch (Exception ex)
             {

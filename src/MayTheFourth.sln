@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MayTheFourth.Shared", "MayT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MayTheFourth.Test", "MayTheFourth.Backend.Test\MayTheFourth.Test.csproj", "{C06D4D71-9A48-4436-8C0F-BC693D2ED389}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MayTheFourth.SWAPIWrapper", "MayTheFourth.SWAPIWrapper\MayTheFourth.SWAPIWrapper.csproj", "{B486EF85-8807-4C84-8421-548191DB30AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MayTheFourth.SWAPIWrapper", "MayTheFourth.SWAPIWrapper\MayTheFourth.SWAPIWrapper.csproj", "{B486EF85-8807-4C84-8421-548191DB30AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
