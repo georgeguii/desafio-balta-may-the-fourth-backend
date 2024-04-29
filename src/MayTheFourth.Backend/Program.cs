@@ -17,6 +17,10 @@ var mapGroup = app.MapGroup("v1");
 
 mapGroup.AddFilmsEndpoints();
 mapGroup.AddCharactersEndpoints();
+mapGroup.AddPlanetsEndpoints();
+mapGroup.AddSpeciesEndpoints();
+mapGroup.AddStarshipsEndpoints();
+mapGroup.AddVehiclesEndpoints();
 
 #endregion
 

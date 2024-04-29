@@ -2,14 +2,17 @@
 
 public class Character : Entity
 {
-    public string Name { get; set; }
-    public string Height { get; set; }
-    public string Weight { get; set; }
-    public string HairColor { get; set; }
-    public string SkinColor { get; set; }
-    public string EyeColor { get; set; }
-    public string BirthYear { get; set; }
-    public string Gender { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Height { get; set; } = string.Empty;
+    public string Weight { get; set; } = string.Empty;
+    public string HairColor { get; set; } = string.Empty;
+    public string SkinColor { get; set; } = string.Empty;
+    public string EyeColor { get; set; } = string.Empty;
+    public string BirthYear { get; set; } = string.Empty;
+    public string Gender { get; set; } = string.Empty;
+    
     public Planet? Planet { get; set; }
+    public int? PlanetdId { get; set; }
+    
     public List<Film>? Films { get; set; }
 }
